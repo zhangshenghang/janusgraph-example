@@ -2,13 +2,12 @@ package com.jast.graph.example.schema;
 
 import org.janusgraph.core.JanusGraph;
 import org.janusgraph.core.JanusGraphFactory;
-import org.janusgraph.core.VertexLabel;
 import org.janusgraph.core.schema.JanusGraphManagement;
 
 public class JanusGraphSchema {
 
-	public JanusGraph janusGraph ;
-	public JanusGraphManagement mgmt ;
+	private JanusGraph janusGraph ;
+	private JanusGraphManagement mgmt ;
 	private String config = "config/server/janusgraph-cassandra-es.properties";
 
 	private JanusGraphSchema(String config) {
