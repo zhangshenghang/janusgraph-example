@@ -6,8 +6,8 @@ import org.janusgraph.core.schema.JanusGraphManagement;
 
 public class JanusGraphSchema {
 
-	private JanusGraph janusGraph ;
-	private JanusGraphManagement mgmt ;
+	private static JanusGraph janusGraph =null ;
+	private static JanusGraphManagement mgmt ;
 	private String config = "config/server/janusgraph-cassandra-es.properties";
 
 	private JanusGraphSchema(String config) {
@@ -24,6 +24,9 @@ public class JanusGraphSchema {
 		return mgmt;
 	}
 
+	public static void close() {
+		janusGraph.close();
+	}
 
 	public static JanusGraphSchema getInstance(String config) {
 		return new JanusGraphSchema(config);

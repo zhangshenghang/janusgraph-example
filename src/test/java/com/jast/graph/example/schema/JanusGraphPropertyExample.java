@@ -23,6 +23,30 @@ public class JanusGraphPropertyExample {
 	}
 	
 	/**
+	 * 查看所有属性名称
+	 * @return void
+	 */
+	@Test
+	public void getPropertyKeys() {
+		//获取对象
+		Iterable<PropertyKey> relationTypes = mgmt.getRelationTypes(PropertyKey.class);
+		relationTypes.forEach(propertyKey->System.out.printf("属性：%s 数据类型为：%s 基数为：%s\n",propertyKey,propertyKey.dataType(),propertyKey.cardinality()));
+		//打印
+		String printPropertyKeys = mgmt.printPropertyKeys();
+		System.out.println(printPropertyKeys);
+	}
+	
+	/**
+	 * 删除属性 
+	 * @return void
+	 */
+	@Test
+	public void dropPropertyKey() {
+		String propertyKeyName = "test111";
+		mgmt.getPropertyKey(propertyKeyName).remove();
+	}
+	
+	/**
 	 * 属性名称修改
 	 * @return void
 	 */
@@ -37,19 +61,7 @@ public class JanusGraphPropertyExample {
 		}
 	}
 	
-	/**
-	 * 查看所有属性名称
-	 * @return void
-	 */
-	@Test
-	public void getPropertyKeys() {
-		//获取对象
-		Iterable<PropertyKey> relationTypes = mgmt.getRelationTypes(PropertyKey.class);
-		relationTypes.forEach(propertyKey->System.out.printf("属性：%s 数据类型为：%s 基数为：%s\n",propertyKey,propertyKey.dataType(),propertyKey.cardinality()));
-		//打印
-		String printPropertyKeys = mgmt.printPropertyKeys();
-		System.out.println(printPropertyKeys);
-	}
+
 	
 	/**
 	 * 创建属性<br/>

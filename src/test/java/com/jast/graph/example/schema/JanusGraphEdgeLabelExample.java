@@ -28,6 +28,31 @@ public class JanusGraphEdgeLabelExample {
 	}
 
 	/**
+	 * 查看所有顶点标签
+	 * @return void
+	 */
+	@Test
+	public void getVertexLabels() {
+		Iterable<VertexLabel> vertexLabels = mgmt.getVertexLabels();
+		vertexLabels.forEach(vertexLabel->vertexLabel.mappedProperties().forEach(pp->System.out.printf("属性：%s 数据类型为：%s 基数为：%s\n",pp,pp.dataType(),pp.cardinality())));
+
+		//打印
+		String printPropertyKeys = mgmt.printVertexLabels();
+		System.out.println(printPropertyKeys);
+	}
+
+	/**
+	 * 删除顶点标签 
+	 * @return void
+	 */
+	@Test
+	public void dropVertexLabel() {
+		String vertexLabelName = "titan";
+		mgmt.getVertexLabel(vertexLabelName).remove();
+		System.out.println(mgmt.printVertexLabels());
+	}
+	
+	/**
 	 * 顶点标签名称修改
 	 * @return void
 	 */
@@ -43,19 +68,6 @@ public class JanusGraphEdgeLabelExample {
 		System.out.println(printVertexLabels);
 	}
 
-	/**
-	 * 查看所有顶点标签
-	 * @return void
-	 */
-	@Test
-	public void getVertexLabels() {
-		Iterable<VertexLabel> vertexLabels = mgmt.getVertexLabels();
-		vertexLabels.forEach(vertexLabel->vertexLabel.mappedProperties().forEach(pp->System.out.printf("属性：%s 数据类型为：%s 基数为：%s\n",pp,pp.dataType(),pp.cardinality())));
-
-		//打印
-		String printPropertyKeys = mgmt.printVertexLabels();
-		System.out.println(printPropertyKeys);
-	}
 
 	/**
 	 * 创建顶点标签

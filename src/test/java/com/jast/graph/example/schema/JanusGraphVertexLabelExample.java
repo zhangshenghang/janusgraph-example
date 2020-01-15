@@ -21,6 +21,30 @@ public class JanusGraphVertexLabelExample {
 			System.out.printf("边标签：%s 包含的属性:%s\n",edgeLabel.name(),edgeLabel.mappedProperties());
 	}
 
+
+	/**
+	 * 查看所有边标签
+	 * @return void
+	 */
+	@Test
+	public void getEdgeLabels() {
+		Iterable<EdgeLabel> relationTypes = mgmt.getRelationTypes(EdgeLabel.class);
+		System.out.println("所有边标签："+relationTypes);
+		//打印
+		String printPropertyKeys = mgmt.printEdgeLabels();
+		System.out.println(printPropertyKeys);
+	}
+
+	/**
+	 * 删除边标签
+	 * @return void
+	 */
+	@Test
+	public void dropEdgeLabel() {
+		String edgeLabelName = "edge1";
+		mgmt.getEdgeLabel(edgeLabelName).remove();
+	}
+
 	/**
 	 * 边标签名称修改
 	 * @return void
@@ -36,18 +60,6 @@ public class JanusGraphVertexLabelExample {
 		System.out.println(mgmt.printEdgeLabels());
 	}
 
-	/**
-	 * 查看所有边标签
-	 * @return void
-	 */
-	@Test
-	public void getEdgeLabels() {
-		Iterable<EdgeLabel> relationTypes = mgmt.getRelationTypes(EdgeLabel.class);
-		System.out.println("所有边标签："+relationTypes);
-		//打印
-		String printPropertyKeys = mgmt.printEdgeLabels();
-		System.out.println(printPropertyKeys);
-	}
 
 	/**
 	 * 创建边标签
