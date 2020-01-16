@@ -1,6 +1,7 @@
 package com.jast.graph.example.api;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -15,6 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.jast.graph.example.entity.PathEntity;
+import com.jast.graph.example.entity.Result;
+import com.jast.graph.example.entity.ResultAll;
 
 /**
  * 
@@ -38,7 +41,8 @@ public class RemoteScriptConnection {
 	}
 
 	// using the remote driver for schema
-	public static Client getClient() throws Exception {
+	public static Client getClient() {
+		try {
 		LOGGER.info("open client...");
 		synchronized (CLASS_LOCK) {
 			if (client == null) {
@@ -47,6 +51,9 @@ public class RemoteScriptConnection {
 				client = cluster.connect();
 				return client;
 			}
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		return client;
 	}
@@ -72,10 +79,10 @@ public class RemoteScriptConnection {
 		long currentTimeMillis = System.currentTimeMillis();
 		//		ResultSet submit = client.submit("g.V(82251856).repeat(bothE().otherV()).times(5).emit().simplePath().path().by(valueMap(true))");
 //		ResultSet submit = client.submit("g.V(82251856).repeat(inE().otherV()).times(5).emit().path().dedup().dedup();");
-		ResultSet submit = GraphQuery.queryPath(client, 82251856, 5);
-		List<PathEntity> queryPath = GraphQuery.pathConvert(submit);
-//		System.out.println(queryPath);
-		queryPath.forEach(x->System.out.println(x.getPath()));
+		ResultAll query = PropagationQuery.query(client, 82251856, 5);
+		System.out.println(query.getVertexData());
+		System.out.println(query.getLp());
+		System.out.println(query.getIds());
 	
 		//		ResultSet submit = client.submit("g.V(82251856).repeat(inE().otherV()).times(4).path().dedup()");
 		

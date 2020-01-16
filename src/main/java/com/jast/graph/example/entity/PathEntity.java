@@ -2,11 +2,11 @@ package com.jast.graph.example.entity;
 
 	
 public class PathEntity {
-	private String inVID;
-	private String EID;
-	private String outVID;
-	private String path;
-	private String info;
+	private String inVID; //入顶点
+	private String EID; //边id
+	private String outVID; //出顶点
+	private String path; // 路径
+	private String info; // path.toString
 	public String getInVID() {
 		return inVID;
 	}
@@ -39,7 +39,7 @@ public class PathEntity {
 	}
 	@Override
 	public String toString() {
-		return "path = " + path;
+		return "path = " + path + "\n";
 	}
 	
 

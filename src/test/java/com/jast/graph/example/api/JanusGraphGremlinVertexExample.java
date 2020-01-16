@@ -9,7 +9,11 @@ import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSo
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.junit.Test;
 
-
+/**
+ * 顶点操作例子
+ * @author jast
+ * @date 2020年1月16日 下午4:56:01
+ */
 public class JanusGraphGremlinVertexExample {
 
 	GraphTraversalSource g = JanusGraphGremlinConnection.getInstance().getGraphTraversalSource();

@@ -3,7 +3,9 @@ package com.jast.graph.example.api;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.tinkerpop.gremlin.driver.Client;
 import org.apache.tinkerpop.gremlin.driver.ResultSet;
@@ -14,8 +16,10 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.structure.util.detached.DetachedPath;
 
 import com.jast.graph.example.entity.PathEntity;
+import com.jast.graph.example.entity.Result;
+import com.jast.graph.example.entity.ResultAll;
 
-public class GraphQuery {
+public class GraphQuery extends JanusGraphGremlinVertex{
 
 
 
@@ -38,8 +42,12 @@ public class GraphQuery {
 	 * @throws SecurityException 
 	 * @throws NoSuchMethodException 
 	 */
-	public static List<PathEntity> pathConvert(ResultSet rs) throws NoSuchMethodException, SecurityException {
+	public static ResultAll pathConvert(ResultSet rs) throws NoSuchMethodException, SecurityException {
+		ResultAll res = new ResultAll();
+		Set<String> set = new HashSet<String>();
 		List<PathEntity> list = new ArrayList<PathEntity>();
+		res.setLp(list);
+		res.setIds(set);
 		rs.forEach(
 				x->{
 					StringBuilder sb = new StringBuilder();
@@ -56,10 +64,13 @@ public class GraphQuery {
 							if(indexOf==-1) 
 							{
 								indexOf = 0 ;
-								sb.insert(indexOf, edge.inVertex().id().toString() + "->"  );
+								String id = edge.inVertex().id().toString();
+								sb.insert(indexOf,  id + "->"  );
+								set.add(id);
 							}
-							sb.insert(indexOf, edge.outVertex().id().toString() + "->" );
-							
+							String id = edge.outVertex().id().toString();
+							sb.insert(indexOf, id + "->" );
+							set.add(id);
 						}
 					});
 					String result = sb.substring(0,sb.length()-2);
@@ -69,6 +80,9 @@ public class GraphQuery {
 					list.add(p);
 				}
 				);
-		return list;
+		return res;
 	}
+	
+	
+	
 }

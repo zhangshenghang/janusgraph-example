@@ -12,6 +12,11 @@ import org.apache.tinkerpop.gremlin.structure.Edge;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.junit.Test;
 
+/**
+ *  边操作例子
+ * @author jast
+ * @date 2020年1月16日 下午4:55:42
+ */
 public class JanusGraphGremlinEdgeExample {
 
 	GraphTraversalSource g = JanusGraphGremlinConnection.getInstance().getGraphTraversalSource();

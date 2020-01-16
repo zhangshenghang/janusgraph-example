@@ -6,6 +6,11 @@ import org.janusgraph.core.VertexLabel;
 import org.janusgraph.core.schema.JanusGraphManagement;
 import org.junit.Test;
 
+/**
+ * 边标签操作例子
+ * @author jast
+ * @date 2020年1月16日 下午4:56:29
+ */
 public class JanusGraphEdgeLabelExample {
 
 	JanusGraphManagement mgmt = JanusGraphSchema.getInstance().createMgmt();

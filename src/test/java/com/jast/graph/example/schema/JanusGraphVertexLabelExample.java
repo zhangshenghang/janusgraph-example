@@ -5,6 +5,11 @@ import org.janusgraph.core.Multiplicity;
 import org.janusgraph.core.schema.JanusGraphManagement;
 import org.junit.Test;
 
+/**
+ * 顶点标签操作例子
+ * @author jast
+ * @date 2020年1月16日 下午4:56:49
+ */
 public class JanusGraphVertexLabelExample {
 
 	JanusGraphManagement mgmt = JanusGraphSchema.getInstance().createMgmt();

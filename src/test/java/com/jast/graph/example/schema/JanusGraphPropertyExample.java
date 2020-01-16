@@ -5,6 +5,11 @@ import org.janusgraph.core.PropertyKey;
 import org.janusgraph.core.schema.JanusGraphManagement;
 import org.junit.Test;
 
+/**
+ * 属性操作例子
+ * @author jast
+ * @date 2020年1月16日 下午4:56:39
+ */
 public class JanusGraphPropertyExample {
 
 	JanusGraphManagement mgmt = JanusGraphSchema.getInstance().createMgmt();
