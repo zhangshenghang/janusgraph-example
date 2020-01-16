@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class JanusGraphGremlinVertexExample {
 
-	GraphTraversalSource g = JanusGraphGremlin.getInstance().getGraphTraversalSource();
+	GraphTraversalSource g = JanusGraphGremlinConnection.getInstance().getGraphTraversalSource();
 
 	/**
 	 * 删除顶点 

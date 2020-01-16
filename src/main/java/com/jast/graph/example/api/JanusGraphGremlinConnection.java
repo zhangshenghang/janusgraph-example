@@ -7,27 +7,27 @@ import org.apache.tinkerpop.gremlin.process.traversal.AnonymousTraversalSource;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 
 
-public class JanusGraphGremlin {
+public class JanusGraphGremlinConnection {
 
 	private static volatile GraphTraversalSource g = null;
 
-	private static final Class<JanusGraphGremlin> CLASS_LOCK = JanusGraphGremlin.class;
+	private static final Class<JanusGraphGremlinConnection> CLASS_LOCK = JanusGraphGremlinConnection.class;
 
 	private String config = "config/client/remote-graph.properties";
 	
-	private JanusGraphGremlin() {
+	private JanusGraphGremlinConnection() {
 	}
 	
-	private JanusGraphGremlin(String config) {
+	private JanusGraphGremlinConnection(String config) {
 		this.config=config;
 	}
 
-	public static JanusGraphGremlin getInstance(String config) {
-		return new JanusGraphGremlin(config);
+	public static JanusGraphGremlinConnection getInstance(String config) {
+		return new JanusGraphGremlinConnection(config);
 	}
 	
-	public static JanusGraphGremlin getInstance() {
-		return new JanusGraphGremlin();
+	public static JanusGraphGremlinConnection getInstance() {
+		return new JanusGraphGremlinConnection();
 	}
 	
 	public GraphTraversalSource getGraphTraversalSource() {

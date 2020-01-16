@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.tinkerpop.gremlin.process.traversal.Bindings;
+import org.apache.tinkerpop.gremlin.process.traversal.Path;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 import org.apache.tinkerpop.gremlin.structure.Edge;
@@ -13,7 +14,7 @@ import org.junit.Test;
 
 public class JanusGraphGremlinEdgeExample {
 
-	GraphTraversalSource g = JanusGraphGremlin.getInstance().getGraphTraversalSource();
+	GraphTraversalSource g = JanusGraphGremlinConnection.getInstance().getGraphTraversalSource();
 	public static final String LABEL = "label";
 	public static final String OUT_V = "outV";
 	public static final String IN_V = "inV";
@@ -41,9 +42,9 @@ public class JanusGraphGremlinEdgeExample {
 		Edge e7 = g.addE("friend").property("name", "relationship").from(article8).to(article5).next();
 		Edge e8 = g.addE("friend").property("name", "relationship").from(article9).to(article5).next();
 		Edge e9 = g.addE("friend").property("name", "relationship").from(article10).to(article9).next();
-		
+
 	}
-	
+
 	@Test
 	public void queryVertexValue() {
 		// 根据ID查询顶点
@@ -69,7 +70,7 @@ public class JanusGraphGremlinEdgeExample {
 	@Test
 	public void addEdge() {
 
-		
+
 		Vertex v1 = g.addV().property("name", "Iverson").property("age", 36).next();
 		Vertex v2 = g.addV().property("name", "Cluo").property("age", 35).next();
 		Edge e1 = g.addE("friend").property("name", "relationship").from(v1).to(v2).next();
@@ -89,6 +90,38 @@ public class JanusGraphGremlinEdgeExample {
 		System.out.println(e2.id());
 	}
 
+	/**
+	 *  查询指定边的两个顶点信息（1）  
+	 * @return void
+	 */
+	@Test
+	public void queryPath() {
+		Set<Path> set = g.V(123120).bothE().path().toSet();
+		set.forEach(
+				x->{
+					//这里x是path类型
+					x.forEach(
+							y->
+							{
+								if(y instanceof Vertex) {
+									System.out.println("点:"+y);
+								}else if(y instanceof Edge){
+									System.out.println("边:" + y);
+								}
+							}
+							);
+					System.out.println("-----------------------------");
+				});
+	}
+	/**
+	 * 查询指定边的两个顶点信息（2）
+	 * @return void
+	 */
+	@Test
+	public void queryEdgeVertex() {
+		GraphTraversal<Vertex,Edge> bothE = g.V(159856).inE();
+		bothE.toList().forEach(edge->System.out.println("原id："+edge.inVertex()+" 目标id:"+edge.outVertex()+" 边："+edge.label()+" "+edge));
+	}
 	/**
 	 * 查询边
 	 * @return void
