@@ -1,10 +1,17 @@
 ### janusgraph java调用
-#### 更新时间：2020.1.11
 #### 学习使用
+
+#### 结构
+> 1.代码中包含传播路径查询demo  
+> >  查询入口 PropagationQueryTest.java   
+> >  数据插入在：PropagationQueryTest.addTestData() 
 
 #### 可视化插件安装 - GraphEXP ：https://datamining.blog.csdn.net/article/details/103896472
 #### 可视化插件安装 - Gephi ：https://datamining.blog.csdn.net/article/details/103894994
+#### JanusGraph单机版安装 ： https://datamining.blog.csdn.net/article/details/103894355
 
+
+```
 在配置文件conf/janusgraph-hbase-solr.properties中添加HBase的访问，配置参数如下：
 
 storage.backend=hbase //使用HBase作为存储后端
@@ -19,4 +26,4 @@ index.search.solr.mode=cloud //solr使用集群模式
 index.search.solr.zookeeper-url=zookeeper-host1:2181/solr,zookeeper-
 host2:2181/solr,zookeeper-host3:2181/solr //HBase使用的Zookeeper
 index.search.solr.configset=janusgraph //Solr使用HBase的元数据表名
-
+```
